@@ -9,48 +9,63 @@ function getComputerChoice() {
 let playerScore = 0
 let computerScore = 0
 
+let playerName = prompt('Enter name');
 
 let playerSelection;
 
+let theResults;
 
 function playRoundRock() {
+    
     let computerSelection = getComputerChoice();
     if (computerSelection === "paper") {
         computerScore++
-        return "you lose"
+        let rockPaper = "you lose";
+        createDiv(rockPaper)
     } else if (computerSelection === "scissors"){
         playerScore++
-        return "you win"
+        rockPaper = "you win";
+        createDiv(rockPaper)
     } else if (computerSelection === "rock"){
-        return "it's a tie"
+        rockPaper = "it's a tie"
+        createDiv(rockPaper)
     }
     
 }
 
 function playRoundPaper() {
+    
     let computerSelection = getComputerChoice();
     if (computerSelection === "paper") {
-        computerScore++
-        return "tie"
+        
+        let paperPaper = "tie"
+        createDiv(paperPaper)
     } else if (computerSelection === "scissors"){
-        playerScore++
-        return "you lose"
+        computerScore++
+        paperPaper = "you lose"
+        createDiv(paperPaper)
     } else if (computerSelection === "rock"){
-        return "win"
+        playerScore++
+        paperPaper = "win"
+        createDiv(paperPaper)
     }
     
 }
 
 function playRoundScissors() {
+    
     let computerSelection = getComputerChoice();
     if (computerSelection === "paper") {
-        computerScore++
-        return "you win"
-    } else if (computerSelection === "scissors"){
         playerScore++
-        return "tie"
+        let scissorPaper = "you win"
+        createDiv(scissorPaper)
+    } else if (computerSelection === "scissors"){
+        scissorPaper = "tie"
+        createDiv(scissorPaper)
     } else if (computerSelection === "rock"){
-        return "you lose"
+        computerScore++
+        scissorPaper = "you lose"
+        createDiv(scissorPaper)
     }
     
 }
@@ -65,53 +80,76 @@ const btn3 = document.querySelector('.button3');
 btn3.addEventListener('click', gameScissors);
 
 function gameRock() {
-    console.log(playRoundRock())
+    playRoundRock()
     if (playerScore === 5 || computerScore === 5) {
         if (playerScore === 5 || computerScore === 5) {
             if (playerScore > computerScore){
-                console.log("Player wins")
+                theResults = `${playerName} wins`;
+                createDiv(theResults)
                 disableButtons()
             } else if (playerScore < computerScore) {
-                console.log("Computer Wins")
+                theResults = `Computer wins`;
+                createDiv(theResults)
                 disableButtons()
             }
         } 
     }
-    console.log(`Player score: ${playerScore} | Computer score: ${computerScore}`)
+    let theScore = `Player score: ${playerScore} | Computer score: ${computerScore}`
+    createDiv(theScore)
     }
 
 function gamePaper() {
-    console.log(playRoundPaper())
+    playRoundPaper()
     if (playerScore === 5 || computerScore === 5) {
         if (playerScore > computerScore){
-            console.log("Player wins")
+            theResults = `${playerName} wins`;
+            createDiv(theResults)
             disableButtons()
         } else if (playerScore < computerScore) {
-            console.log("Computer Wins")
+            theResults = 'computer wins';
+            createDiv(theResults)
             disableButtons()
         }  
     }
-     console.log(`Player score: ${playerScore} | Computer score: ${computerScore}`)
-    }
+    let theScore = `Player score: ${playerScore} | Computer score: ${computerScore}`
+    createDiv(theScore)    
+}
 
 function gameScissors() {
-    console.log(playRoundScissors())
+    playRoundScissors()
     if (playerScore === 5 || computerScore === 5) {
         if (playerScore === 5 || computerScore === 5) {
             if (playerScore > computerScore){
-                console.log("Player wins")
+                theResults = `${playerName} wins`;
+                createDiv(theResults)
                 disableButtons()
             } else if (playerScore < computerScore) {
-                console.log("Computer Wins") 
+                theResults = 'computer wins';
+                createDiv(theResults)
                 disableButtons()
             }
         }
     }
-    console.log(`Player score: ${playerScore} | Computer score: ${computerScore}`)
+    let theScore = `Player score: ${playerScore} | Computer score: ${computerScore}`
+    createDiv(theScore)
     }
 
-    function disableButtons(){
+    function disableButtons() {
         btn.disabled = true;
         btn2.disabled = true;
         btn3.disabled = true;
     }
+    
+    function createDiv(res) {
+        const results = document.querySelector('.results');
+        const content = document.createElement('div');
+        content.classList.add('content');
+        content.textContent = res;
+        results.appendChild(content);
+    }
+
+    function clearDiv() {
+        document.querySelector('results').innerHTML = '';
+    }
+
+    
